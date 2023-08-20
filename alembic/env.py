@@ -67,7 +67,9 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, 
+            target_metadata=target_metadata, 
+            version_table_schema='autos_etl',
         )
 
         with context.begin_transaction():
