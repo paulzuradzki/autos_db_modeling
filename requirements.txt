@@ -1,0 +1,7 @@
+alembic
+eralchemy2
+openpyxl
+pandas
+python-docx
+python-dotenv
+SQLAlchemy
