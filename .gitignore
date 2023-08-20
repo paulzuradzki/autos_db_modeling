@@ -19,3 +19,9 @@ venv/
 
 # temporary Jupyter IPython notebook files
 .ipynb_checkpoints/
+
+# mypy (type checker) cache
+.mypy_cache
+
+# ruff (linter) cache
+.ruff_cache
