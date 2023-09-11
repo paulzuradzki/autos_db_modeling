@@ -25,16 +25,9 @@ $ source venv/bin/activate
 ```
 
 #### Load environment variables
-* You only need to do this if you are running migrations.
-* This bash script will load the `DATABASE_URL` environment variable from `.env` file.
 
-```bash
-(venv) $ source ./setup.sh
-```
-
-* The `DATABASE_URL` variable is accessed in `alembic.ini` for migrations. 
-* The idea behind parameterizing this variable is if you wanted to alternate between a dev and prod database.
-
+* Create an `.env` file and set `DATABASE_URL`. See `.env.example`.
+* This environment variable will be loaded for database loading scripts and schema migration via `./alembic/env.py`
 
 # Usage
 
