@@ -2,7 +2,10 @@
 
 # Description
 
-Package for schema definition and ETL for auto data.
+This is a package for schema definition and ETL for fictional automotive dealership data.
+
+* It's an exercise in database modeling, schema design, and ETL. 
+* We will show how to programmatically define table schemas using an ORM, create Entity Relationship Diagrams (ERD), generate SQL DDL (data definition language), and use database migrations.
 
 # Setup
 
