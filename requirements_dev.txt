@@ -1,15 +1,8 @@
-# Formatter
 black
 black[jupyter]
-
-# VS Code notebooks
 ipykernel
-
-# Type checker
+ipython
 mypy
-
-# Linter
+pytest
 ruff
-
-# Install package from source
 --editable .

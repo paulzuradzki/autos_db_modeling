@@ -1,3 +1,6 @@
+"""Retrieval functions for source files.
+"""
+
 from io import BytesIO
 
 import openpyxl as xl
@@ -45,22 +48,21 @@ def get_df_file_a() -> pd.DataFrame:
     df = pd.DataFrame(data, columns=column_names)
     df.iloc[[6, 8, 9], 5:] = df.iloc[[6, 8, 9], 5:].shift(1, axis=1)
 
-    df.loc[1, ["drive_train_type", "msrp_amount"]] = df.loc[1, "drive_train_type"].split(
+    df.loc[1, ["drive_train_type", "msrp_amount"]] = df.loc[
+        1, "drive_train_type"
+    ].split(
         '"'
     )[  # type: ignore
         :-1
     ]
 
-    df = (df
-          .fillna("")
-          
-          # remove whitespace characters like \r and \r\r
-          .applymap(lambda s: s.strip())
-                    
-          .assign(msrp_amount=lambda _df: _df["msrp_amount"]
-                  .apply(clean_price)
-                  )
-          )
+    df = (
+        df.fillna("")
+        # remove whitespace characters like \r and \r\r
+        .map(lambda s: s.strip()).assign(
+            msrp_amount=lambda _df: _df["msrp_amount"].apply(clean_price)
+        )
+    )
 
     return df
 

@@ -44,7 +44,7 @@ $ source venv/bin/activate
 (venv) $ scripts/make_erd.py
 ```
 
-#### Run Database Migrations
+#### Apply Database Schema Changes
 
 * Migrations allow you to track, upgrade, and downgrade the states of the database schema.
 * A migrations tool lets you compare the state of your database to the models defined in your application code.
@@ -54,11 +54,51 @@ $ source venv/bin/activate
 
 ```bash
 # Example of making a migration
-alembic revision --autogenerate -m "add transaction type table"
+# This creates a migrations  file in alembic/versions/*.py
+alembic revision --autogenerate -m "initial schema"
 
 # Example of applying a migration
+# On first execution (if there is a migration file), 
+# this will run all the create-table statements in the database
 alembic upgrade head
 
-# Generating SQL instead of applying the migration
+# Generate the SQL
+# This does not apply changes to the database
 alembic upgrade head --sql > migration.sql
+```
+
+#### Using a different schema / metadata object
+
+See `alembic/env.py`
+
+```python
+# alembic/env.py
+from autos_etl.model_01_dealer import metadata_obj
+target_metadata = metadata_obj
+```
+
+Update the import and `target_metadata` as needed if you want to point to a different schema as opposed to running incremental migrations from schema A to B.
+
+#### Load the database
+
+Transform and load source data to the datababse.
+
+```bash
+python scripts/load_db.py
+```
+
+# Troubleshooting
+
+#### Issue: ERAlchemy2-generated diagrams are not displaying joins. 
+
+Solution: ERAlchemy won't correctly render if you use a schema.
+
+```python
+metadata_obj = MetaData(schema="autos_etl")
+```
+
+For diagram generation, update to use default schema in SQLAlchemy database objects by removing the schema argument like so.
+
+```python
+metadata_obj = MetaData()
 ```

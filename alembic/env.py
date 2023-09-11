@@ -2,7 +2,7 @@ import os
 from logging.config import fileConfig
 
 import dotenv
-from autos_etl.models import metadata_obj
+from autos_etl.model_01_dealer import metadata_obj
 from sqlalchemy import create_engine, pool
 
 from alembic import context
