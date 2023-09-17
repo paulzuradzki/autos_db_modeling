@@ -52,6 +52,11 @@ fact_sale_transactions = Table(
     metadata_obj,
     Column("id", Integer, primary_key=True, comment="Unique ID. Primary key."),  # noqa
     Column(
+        "transaction_id",
+        Integer,
+        comment="External system transaction ID (pre-owned dealer).",
+    ),  # noqa
+    Column(
         "created",
         TIMESTAMP,
         server_default=text("CURRENT_TIMESTAMP"),
@@ -70,6 +75,11 @@ fact_sale_transactions = Table(
         ForeignKey("dim_customer.id"),
         comment="Customer ID for joining to customer dimensions.",
     ),  # noqa
+    Column(
+        "dim_employee_id",
+        ForeignKey("dim_employee.id"),
+        comment="Employee ID.",
+    ),
     Column(
         "dim_vehicle_id",
         Integer,
@@ -92,7 +102,6 @@ fact_sale_transactions = Table(
     Column("trade_in_value_amount", DECIMAL, comment="Value of trade-in vehicle."),
     comment="Sale transactions table to caputure the event of a vehicle sale and measures like purchase price amount.",  # noqa
 )
-
 fact_customer_relations = Table(
     "fact_customer_relations",
     metadata_obj,
@@ -122,6 +131,11 @@ fact_customer_relations = Table(
         TEXT,
         comment="Notes for a given encounter with a customer.",
     ),
+    Column(
+        "is_repeat_customer",
+        BOOLEAN,
+        comment="True if customer is a repeat customer. Otherwise, False.",
+    ),  # noqa
     comment="Track customer relation encounters and notes. An individual customer may have multiple notes and encounters.",  # noqa
 )
 
@@ -144,17 +158,36 @@ dim_customer = Table(
     ),  # noqa
     Column("first_name", String(50), comment="Customer first name."),  # noqa
     Column("last_name", String(50), comment="Customer last name."),  # noqa
+    Column("full_name", String(100)),
     Column("middle_initial", String(10), comment="Customer middle initial."),  # noqa
-    Column("address", String(100), comment="Customer street address."),  # noqa
+    Column("phone", String(100)),
+    Column("street_address", String(100), comment="Customer street address."),  # noqa
     Column("city", String(100), comment="Customer address city."),  # noqa
     Column("state", String(100), comment="Customer address state."),  # noqa
+    Column("zip", String(100), comment="Customer address zip code."),  # noqa
     Column("country", String(100), comment="Customer address country."),  # noqa
     Column(
-        "is_repeat_customer",
-        BOOLEAN,
-        comment="True if customer is a repeat customer. Otherwise, False.",
+        "full_address",
+        String(500),
+        comment="Customer full address in format: <street_address> <city>, <state> <zip>",
     ),  # noqa
     comment="Customer dimension table.",  # noqa
+)
+
+dim_employee = Table(
+    "dim_employee",
+    metadata_obj,
+    Column("id", Integer, primary_key=True),
+    Column("created", TIMESTAMP, server_default=text("CURRENT_TIMESTAMP")),
+    Column(
+        "last_updated",
+        TIMESTAMP,
+        server_default=text("CURRENT_TIMESTAMP"),
+        onupdate=text("CURRENT_TIMESTAMP"),
+    ),
+    Column("first_name", String(50)),
+    Column("last_name", String(50)),
+    Column("full_name", String(100)),
 )
 
 DISCOUNT_TYPE_CHOICES = [

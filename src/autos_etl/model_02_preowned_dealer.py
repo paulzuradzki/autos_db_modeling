@@ -12,27 +12,34 @@ from sqlalchemy import (
     text,
 )
 
-metadata_obj = MetaData(schema="autos_etl")
+# metadata_obj = MetaData(schema="autos_etl")
 # For ERAlchemy2. No schema supportin ERD creation from Python/SQLAlchemy.
-# metadata_obj = MetaData()
+metadata_obj = MetaData()
 
 fact_transaction = Table(
     "fact_transaction",
     metadata_obj,
-    Column("id", Integer, primary_key=True),
-    Column("created", TIMESTAMP, server_default=text("CURRENT_TIMESTAMP")),
+    Column("id", Integer, primary_key=True, comment="Unique ID. Primary key."),  # noqa
+    Column(
+        "created",
+        TIMESTAMP,
+        server_default=text("CURRENT_TIMESTAMP"),
+        comment="Datetime stamp for when the record was created.",
+    ),  # noqa
     Column(
         "last_updated",
         TIMESTAMP,
         server_default=text("CURRENT_TIMESTAMP"),
         onupdate=text("CURRENT_TIMESTAMP"),
-    ),
+        comment="Datetime stamp for when the record was last updated.",
+    ),  # noqa
     Column("transaction_id", Integer),
     Column("dim_employee_id", ForeignKey("dim_employee.id")),
     Column("dim_customer_id", ForeignKey("dim_customer.id")),
     Column("dim_vehicle_id", ForeignKey("dim_vehicle.id")),
     Column("sale_date", DATE),
     Column("purchase_price_amount", DECIMAL),
+    Column("dealer_purchase_cost_amount", DECIMAL),
     Column(
         "is_trade_in",
         BOOLEAN,

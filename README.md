@@ -98,3 +98,21 @@ For diagram generation, update to use default schema in SQLAlchemy database obje
 ```python
 metadata_obj = MetaData()
 ```
+
+
+# Resources
+* [Entity Relationship Diagramming with Mermaid](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
+* [eralchemy2 - entity relations diagram generator](https://github.com/maurerle/eralchemy2/tree/main)
+* [Dimensional Modelling Techniques - Kimball Methods](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/)
+
+
+# Reading Entity Relationship (ER) Diagrams
+
+* We have tables and fields (a.k.a., attributes, columns).
+* For each table, we define a column name, its data types in brackets, and nullability if specified.
+* Primary keys are denoted by underlines. Some ERD generators use asterisks.
+* Foreign keys are denoted using a dashed line from the foreign key field to the foreign key table. 
+  * The association with the primary key of the foreign table is implied. 
+  * The labels of the fields may be different (e.g., `dim_customer.id` primary key vs `fact_customer_relations.dim_customer_id`) between tables.
+
+![ERD Explainer](docs/erd_explainer.jpg)
