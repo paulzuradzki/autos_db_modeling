@@ -1,0 +1,36 @@
+[fact_sale_transactions_dealer_01]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_customer_id {label:"INTEGER"}
+    dim_discount_type_id {label:"INTEGER"}
+    dim_vehicle_id {label:"INTEGER"}
+    is_trade_in {label:"BOOLEAN"}
+    last_updated {label:"TIMESTAMP"}
+    purchase_price_amount {label:"DECIMAL"}
+    sale_date {label:"DATE"}
+    trade_in_value_amount {label:"DECIMAL"}
+[fact_transaction_dealer_02]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_customer_id {label:"NULL"}
+    dim_employee_id {label:"NULL"}
+    dim_vehicle_id {label:"NULL"}
+    is_trade_in {label:"BOOLEAN"}
+    last_updated {label:"TIMESTAMP"}
+    purchase_price_amount {label:"DECIMAL"}
+    sale_date {label:"DATE"}
+    trade_in_value_amount {label:"DECIMAL"}
+    transaction_id {label:"INTEGER"}
+[fact_sale_transactions_integrated]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_customer_id {label:"INTEGER"}
+    dim_discount_type_id {label:"INTEGER"}
+    dim_employee_id {label:"NULL"}
+    dim_vehicle_id {label:"INTEGER"}
+    is_trade_in {label:"BOOLEAN"}
+    last_updated {label:"TIMESTAMP"}
+    purchase_price_amount {label:"DECIMAL"}
+    sale_date {label:"DATE"}
+    trade_in_value_amount {label:"DECIMAL"}
+    transaction_id {label:"INTEGER"}

@@ -1,0 +1,94 @@
+<!--
+
+classDiagram
+class fact_inventory{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   INTEGER dim_vehicle_id
+   BOOLEAN is_in_stock
+   TIMESTAMP last_updated
+}
+class fact_sale_transactions{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   INTEGER dim_customer_id
+   INTEGER dim_discount_type_id
+   INTEGER dim_employee_id
+   INTEGER dim_vehicle_id
+   BOOLEAN is_trade_in
+   TIMESTAMP last_updated
+   DECIMAL purchase_price_amount
+   DATE sale_date
+   DECIMAL trade_in_value_amount
+   INTEGER transaction_id
+}
+class fact_customer_relations{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   INTEGER dim_customer_id
+   DATE encounter_date
+   TEXT encounter_notes
+   BOOLEAN is_repeat_customer
+   TIMESTAMP last_updated
+}
+class dim_customer{
+   *INTEGER id NOT NULL
+   VARCHAR<100> city
+   VARCHAR<100> country
+   TIMESTAMP created
+   VARCHAR<50> first_name
+   VARCHAR<500> full_address
+   VARCHAR<100> full_name
+   VARCHAR<50> last_name
+   TIMESTAMP last_updated
+   VARCHAR<10> middle_initial
+   VARCHAR<100> phone
+   VARCHAR<100> state
+   VARCHAR<100> street_address
+   VARCHAR<100> zip
+}
+class dim_employee{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   VARCHAR<50> first_name
+   VARCHAR<100> full_name
+   VARCHAR<50> last_name
+   TIMESTAMP last_updated
+}
+class dim_discount_type{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   TIMESTAMP last_updated
+   VARCHAR<20> name
+}
+class dim_vehicle{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   INTEGER dim_vehicle_model_id
+   TIMESTAMP last_updated
+   VARCHAR<100> vin
+}
+class dim_vehicle_model{
+   *INTEGER id NOT NULL
+   VARCHAR<20> color
+   TIMESTAMP created
+   VARCHAR<20> door_type
+   VARCHAR<20> drive_train_type
+   TIMESTAMP last_updated
+   VARCHAR<20> make
+   VARCHAR<20> model
+   DECIMAL msrp_amount
+   VARCHAR<100> trim
+   VARCHAR<20> wheel_drive_type
+   INTEGER year
+}
+dim_vehicle "0..1" -- "0..n" fact_inventory
+dim_customer "0..1" -- "0..n" fact_sale_transactions
+dim_employee "0..1" -- "0..n" fact_sale_transactions
+dim_vehicle "0..1" -- "0..n" fact_sale_transactions
+dim_discount_type "0..1" -- "0..n" fact_sale_transactions
+dim_customer "0..1" -- "0..n" fact_customer_relations
+dim_vehicle_model "0..1" -- "0..n" dim_vehicle
+
+-->
+![](https://mermaid.ink/img/Y2xhc3NEaWFncmFtCmNsYXNzIGZhY3RfaW52ZW50b3J5ewogICAqSU5URUdFUiBpZCBOT1QgTlVMTAogICBUSU1FU1RBTVAgY3JlYXRlZAogICBJTlRFR0VSIGRpbV92ZWhpY2xlX2lkCiAgIEJPT0xFQU4gaXNfaW5fc3RvY2sKICAgVElNRVNUQU1QIGxhc3RfdXBkYXRlZAp9CmNsYXNzIGZhY3Rfc2FsZV90cmFuc2FjdGlvbnN7CiAgICpJTlRFR0VSIGlkIE5PVCBOVUxMCiAgIFRJTUVTVEFNUCBjcmVhdGVkCiAgIElOVEVHRVIgZGltX2N1c3RvbWVyX2lkCiAgIElOVEVHRVIgZGltX2Rpc2NvdW50X3R5cGVfaWQKICAgSU5URUdFUiBkaW1fZW1wbG95ZWVfaWQKICAgSU5URUdFUiBkaW1fdmVoaWNsZV9pZAogICBCT09MRUFOIGlzX3RyYWRlX2luCiAgIFRJTUVTVEFNUCBsYXN0X3VwZGF0ZWQKICAgREVDSU1BTCBwdXJjaGFzZV9wcmljZV9hbW91bnQKICAgREFURSBzYWxlX2RhdGUKICAgREVDSU1BTCB0cmFkZV9pbl92YWx1ZV9hbW91bnQKICAgSU5URUdFUiB0cmFuc2FjdGlvbl9pZAp9CmNsYXNzIGZhY3RfY3VzdG9tZXJfcmVsYXRpb25zewogICAqSU5URUdFUiBpZCBOT1QgTlVMTAogICBUSU1FU1RBTVAgY3JlYXRlZAogICBJTlRFR0VSIGRpbV9jdXN0b21lcl9pZAogICBEQVRFIGVuY291bnRlcl9kYXRlCiAgIFRFWFQgZW5jb3VudGVyX25vdGVzCiAgIEJPT0xFQU4gaXNfcmVwZWF0X2N1c3RvbWVyCiAgIFRJTUVTVEFNUCBsYXN0X3VwZGF0ZWQKfQpjbGFzcyBkaW1fY3VzdG9tZXJ7CiAgICpJTlRFR0VSIGlkIE5PVCBOVUxMCiAgIFZBUkNIQVI8MTAwPiBjaXR5CiAgIFZBUkNIQVI8MTAwPiBjb3VudHJ5CiAgIFRJTUVTVEFNUCBjcmVhdGVkCiAgIFZBUkNIQVI8NTA-IGZpcnN0X25hbWUKICAgVkFSQ0hBUjw1MDA-IGZ1bGxfYWRkcmVzcwogICBWQVJDSEFSPDEwMD4gZnVsbF9uYW1lCiAgIFZBUkNIQVI8NTA-IGxhc3RfbmFtZQogICBUSU1FU1RBTVAgbGFzdF91cGRhdGVkCiAgIFZBUkNIQVI8MTA-IG1pZGRsZV9pbml0aWFsCiAgIFZBUkNIQVI8MTAwPiBwaG9uZQogICBWQVJDSEFSPDEwMD4gc3RhdGUKICAgVkFSQ0hBUjwxMDA-IHN0cmVldF9hZGRyZXNzCiAgIFZBUkNIQVI8MTAwPiB6aXAKfQpjbGFzcyBkaW1fZW1wbG95ZWV7CiAgICpJTlRFR0VSIGlkIE5PVCBOVUxMCiAgIFRJTUVTVEFNUCBjcmVhdGVkCiAgIFZBUkNIQVI8NTA-IGZpcnN0X25hbWUKICAgVkFSQ0hBUjwxMDA-IGZ1bGxfbmFtZQogICBWQVJDSEFSPDUwPiBsYXN0X25hbWUKICAgVElNRVNUQU1QIGxhc3RfdXBkYXRlZAp9CmNsYXNzIGRpbV9kaXNjb3VudF90eXBlewogICAqSU5URUdFUiBpZCBOT1QgTlVMTAogICBUSU1FU1RBTVAgY3JlYXRlZAogICBUSU1FU1RBTVAgbGFzdF91cGRhdGVkCiAgIFZBUkNIQVI8MjA-IG5hbWUKfQpjbGFzcyBkaW1fdmVoaWNsZXsKICAgKklOVEVHRVIgaWQgTk9UIE5VTEwKICAgVElNRVNUQU1QIGNyZWF0ZWQKICAgSU5URUdFUiBkaW1fdmVoaWNsZV9tb2RlbF9pZAogICBUSU1FU1RBTVAgbGFzdF91cGRhdGVkCiAgIFZBUkNIQVI8MTAwPiB2aW4KfQpjbGFzcyBkaW1fdmVoaWNsZV9tb2RlbHsKICAgKklOVEVHRVIgaWQgTk9UIE5VTEwKICAgVkFSQ0hBUjwyMD4gY29sb3IKICAgVElNRVNUQU1QIGNyZWF0ZWQKICAgVkFSQ0hBUjwyMD4gZG9vcl90eXBlCiAgIFZBUkNIQVI8MjA-IGRyaXZlX3RyYWluX3R5cGUKICAgVElNRVNUQU1QIGxhc3RfdXBkYXRlZAogICBWQVJDSEFSPDIwPiBtYWtlCiAgIFZBUkNIQVI8MjA-IG1vZGVsCiAgIERFQ0lNQUwgbXNycF9hbW91bnQKICAgVkFSQ0hBUjwxMDA-IHRyaW0KICAgVkFSQ0hBUjwyMD4gd2hlZWxfZHJpdmVfdHlwZQogICBJTlRFR0VSIHllYXIKfQpkaW1fdmVoaWNsZSAiMC4uMSIgLS0gIjAuLm4iIGZhY3RfaW52ZW50b3J5CmRpbV9jdXN0b21lciAiMC4uMSIgLS0gIjAuLm4iIGZhY3Rfc2FsZV90cmFuc2FjdGlvbnMKZGltX2VtcGxveWVlICIwLi4xIiAtLSAiMC4ubiIgZmFjdF9zYWxlX3RyYW5zYWN0aW9ucwpkaW1fdmVoaWNsZSAiMC4uMSIgLS0gIjAuLm4iIGZhY3Rfc2FsZV90cmFuc2FjdGlvbnMKZGltX2Rpc2NvdW50X3R5cGUgIjAuLjEiIC0tICIwLi5uIiBmYWN0X3NhbGVfdHJhbnNhY3Rpb25zCmRpbV9jdXN0b21lciAiMC4uMSIgLS0gIjAuLm4iIGZhY3RfY3VzdG9tZXJfcmVsYXRpb25zCmRpbV92ZWhpY2xlX21vZGVsICIwLi4xIiAtLSAiMC4ubiIgZGltX3ZlaGljbGU=)

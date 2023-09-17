@@ -1,0 +1,46 @@
+[dim_vehicle_dealer_01]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_vehicle_model_id {label:"INTEGER"}
+    last_updated {label:"TIMESTAMP"}
+    vin {label:"VARCHAR(100)"}
+[dim_vehicle_model_dealer_01]
+    *id {label:"INTEGER"}
+    color {label:"VARCHAR(20)"}
+    created {label:"TIMESTAMP"}
+    door_type {label:"VARCHAR(20)"}
+    drive_train_type {label:"VARCHAR(20)"}
+    last_updated {label:"TIMESTAMP"}
+    make {label:"VARCHAR(20)"}
+    model {label:"VARCHAR(20)"}
+    msrp_amount {label:"DECIMAL"}
+    trim {label:"VARCHAR(100)"}
+    wheel_drive_type {label:"VARCHAR(20)"}
+    year {label:"INTEGER"}
+[dim_vehicle_dealer_02]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    last_updated {label:"TIMESTAMP"}
+    msrp_amount {label:"DECIMAL"}
+    vin {label:"VARCHAR(100)"}
+[dim_vehicle_dealer_integrated]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_vehicle_model_id {label:"INTEGER"}
+    last_updated {label:"TIMESTAMP"}
+    vin {label:"VARCHAR(100)"}
+[dim_vehicle_model_integrated]
+    *id {label:"INTEGER"}
+    color {label:"VARCHAR(20)"}
+    created {label:"TIMESTAMP"}
+    door_type {label:"VARCHAR(20)"}
+    drive_train_type {label:"VARCHAR(20)"}
+    last_updated {label:"TIMESTAMP"}
+    make {label:"VARCHAR(20)"}
+    model {label:"VARCHAR(20)"}
+    msrp_amount {label:"DECIMAL"}
+    trim {label:"VARCHAR(100)"}
+    wheel_drive_type {label:"VARCHAR(20)"}
+    year {label:"INTEGER"}
+dim_vehicle_model_dealer_01 ?--* dim_vehicle_dealer_01
+dim_vehicle_model_integrated ?--* dim_vehicle_dealer_integrated

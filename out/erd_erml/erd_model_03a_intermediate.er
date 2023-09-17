@@ -1,0 +1,39 @@
+[dim_customer_dealer_01]
+    *id {label:"INTEGER"}
+    address {label:"VARCHAR(100)"}
+    city {label:"VARCHAR(100)"}
+    country {label:"VARCHAR(100)"}
+    created {label:"TIMESTAMP"}
+    first_name {label:"VARCHAR(50)"}
+    is_repeat_customer {label:"BOOLEAN"}
+    last_name {label:"VARCHAR(50)"}
+    last_updated {label:"TIMESTAMP"}
+    middle_initial {label:"VARCHAR(10)"}
+    state {label:"VARCHAR(100)"}
+[dim_customer_dealer_02]
+    *id {label:"INTEGER"}
+    city {label:"VARCHAR(100)"}
+    created {label:"TIMESTAMP"}
+    first_name {label:"VARCHAR(50)"}
+    full_address {label:"VARCHAR(100)"}
+    full_name {label:"VARCHAR(100)"}
+    last_name {label:"VARCHAR(50)"}
+    last_updated {label:"TIMESTAMP"}
+    phone {label:"VARCHAR(100)"}
+    state {label:"VARCHAR(100)"}
+    street {label:"VARCHAR(100)"}
+[dim_customer_integrated]
+    *id {label:"INTEGER"}
+    city {label:"VARCHAR(100)"}
+    country {label:"VARCHAR(100)"}
+    created {label:"TIMESTAMP"}
+    first_name {label:"VARCHAR(50)"}
+    full_address {label:"VARCHAR(500)"}
+    full_name {label:"VARCHAR(100)"}
+    last_name {label:"VARCHAR(50)"}
+    last_updated {label:"TIMESTAMP"}
+    middle_initial {label:"VARCHAR(10)"}
+    phone {label:"VARCHAR(100)"}
+    state {label:"VARCHAR(100)"}
+    street_address {label:"VARCHAR(100)"}
+    zip {label:"VARCHAR(100)"}

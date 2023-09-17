@@ -1,0 +1,66 @@
+[fact_inventory]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_vehicle_id {label:"INTEGER"}
+    is_in_stock {label:"BOOLEAN"}
+    last_updated {label:"TIMESTAMP"}
+[fact_sale_transactions]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_customer_id {label:"INTEGER"}
+    dim_discount_type_id {label:"INTEGER"}
+    dim_vehicle_id {label:"INTEGER"}
+    is_trade_in {label:"BOOLEAN"}
+    last_updated {label:"TIMESTAMP"}
+    purchase_price_amount {label:"DECIMAL"}
+    sale_date {label:"DATE"}
+    trade_in_value_amount {label:"DECIMAL"}
+[fact_customer_relations]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_customer_id {label:"INTEGER"}
+    encounter_date {label:"DATE"}
+    encounter_notes {label:"TEXT"}
+    last_updated {label:"TIMESTAMP"}
+[dim_customer]
+    *id {label:"INTEGER"}
+    address {label:"VARCHAR(100)"}
+    city {label:"VARCHAR(100)"}
+    country {label:"VARCHAR(100)"}
+    created {label:"TIMESTAMP"}
+    first_name {label:"VARCHAR(50)"}
+    is_repeat_customer {label:"BOOLEAN"}
+    last_name {label:"VARCHAR(50)"}
+    last_updated {label:"TIMESTAMP"}
+    middle_initial {label:"VARCHAR(10)"}
+    state {label:"VARCHAR(100)"}
+[dim_discount_type]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    last_updated {label:"TIMESTAMP"}
+    name {label:"VARCHAR(20)"}
+[dim_vehicle]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dim_vehicle_model_id {label:"INTEGER"}
+    last_updated {label:"TIMESTAMP"}
+    vin {label:"VARCHAR(100)"}
+[dim_vehicle_model]
+    *id {label:"INTEGER"}
+    color {label:"VARCHAR(20)"}
+    created {label:"TIMESTAMP"}
+    door_type {label:"VARCHAR(20)"}
+    drive_train_type {label:"VARCHAR(20)"}
+    last_updated {label:"TIMESTAMP"}
+    make {label:"VARCHAR(20)"}
+    model {label:"VARCHAR(20)"}
+    msrp_amount {label:"DECIMAL"}
+    trim {label:"VARCHAR(100)"}
+    wheel_drive_type {label:"VARCHAR(20)"}
+    year {label:"INTEGER"}
+dim_vehicle ?--* fact_inventory
+dim_discount_type ?--* fact_sale_transactions
+dim_customer ?--* fact_sale_transactions
+dim_vehicle ?--* fact_sale_transactions
+dim_customer ?--* fact_customer_relations
+dim_vehicle_model ?--* dim_vehicle

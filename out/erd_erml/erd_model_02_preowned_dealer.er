@@ -1,0 +1,41 @@
+[fact_transaction]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    dealer_purchase_cost_amount {label:"DECIMAL"}
+    dim_customer_id {label:"INTEGER"}
+    dim_employee_id {label:"INTEGER"}
+    dim_vehicle_id {label:"INTEGER"}
+    is_trade_in {label:"BOOLEAN"}
+    last_updated {label:"TIMESTAMP"}
+    purchase_price_amount {label:"DECIMAL"}
+    sale_date {label:"DATE"}
+    trade_in_value_amount {label:"DECIMAL"}
+    transaction_id {label:"INTEGER"}
+[dim_customer]
+    *id {label:"INTEGER"}
+    city {label:"VARCHAR(100)"}
+    created {label:"TIMESTAMP"}
+    first_name {label:"VARCHAR(50)"}
+    full_address {label:"VARCHAR(100)"}
+    full_name {label:"VARCHAR(100)"}
+    last_name {label:"VARCHAR(50)"}
+    last_updated {label:"TIMESTAMP"}
+    phone {label:"VARCHAR(100)"}
+    state {label:"VARCHAR(100)"}
+    street {label:"VARCHAR(100)"}
+[dim_employee]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    first_name {label:"VARCHAR(50)"}
+    full_name {label:"VARCHAR(100)"}
+    last_name {label:"VARCHAR(50)"}
+    last_updated {label:"TIMESTAMP"}
+[dim_vehicle]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    last_updated {label:"TIMESTAMP"}
+    msrp_amount {label:"DECIMAL"}
+    vin {label:"VARCHAR(100)"}
+dim_customer ?--* fact_transaction
+dim_employee ?--* fact_transaction
+dim_vehicle ?--* fact_transaction

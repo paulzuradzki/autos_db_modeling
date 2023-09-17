@@ -1,0 +1,51 @@
+<!--
+
+classDiagram
+class fact_transaction{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   DECIMAL dealer_purchase_cost_amount
+   INTEGER dim_customer_id
+   INTEGER dim_employee_id
+   INTEGER dim_vehicle_id
+   BOOLEAN is_trade_in
+   TIMESTAMP last_updated
+   DECIMAL purchase_price_amount
+   DATE sale_date
+   DECIMAL trade_in_value_amount
+   INTEGER transaction_id
+}
+class dim_customer{
+   *INTEGER id NOT NULL
+   VARCHAR<100> city
+   TIMESTAMP created
+   VARCHAR<50> first_name
+   VARCHAR<100> full_address
+   VARCHAR<100> full_name
+   VARCHAR<50> last_name
+   TIMESTAMP last_updated
+   VARCHAR<100> phone
+   VARCHAR<100> state
+   VARCHAR<100> street
+}
+class dim_employee{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   VARCHAR<50> first_name
+   VARCHAR<100> full_name
+   VARCHAR<50> last_name
+   TIMESTAMP last_updated
+}
+class dim_vehicle{
+   *INTEGER id NOT NULL
+   TIMESTAMP created
+   TIMESTAMP last_updated
+   DECIMAL msrp_amount
+   VARCHAR<100> vin
+}
+dim_customer "0..1" -- "0..n" fact_transaction
+dim_employee "0..1" -- "0..n" fact_transaction
+dim_vehicle "0..1" -- "0..n" fact_transaction
+
+-->
+![](https://mermaid.ink/img/Y2xhc3NEaWFncmFtCmNsYXNzIGZhY3RfdHJhbnNhY3Rpb257CiAgICpJTlRFR0VSIGlkIE5PVCBOVUxMCiAgIFRJTUVTVEFNUCBjcmVhdGVkCiAgIERFQ0lNQUwgZGVhbGVyX3B1cmNoYXNlX2Nvc3RfYW1vdW50CiAgIElOVEVHRVIgZGltX2N1c3RvbWVyX2lkCiAgIElOVEVHRVIgZGltX2VtcGxveWVlX2lkCiAgIElOVEVHRVIgZGltX3ZlaGljbGVfaWQKICAgQk9PTEVBTiBpc190cmFkZV9pbgogICBUSU1FU1RBTVAgbGFzdF91cGRhdGVkCiAgIERFQ0lNQUwgcHVyY2hhc2VfcHJpY2VfYW1vdW50CiAgIERBVEUgc2FsZV9kYXRlCiAgIERFQ0lNQUwgdHJhZGVfaW5fdmFsdWVfYW1vdW50CiAgIElOVEVHRVIgdHJhbnNhY3Rpb25faWQKfQpjbGFzcyBkaW1fY3VzdG9tZXJ7CiAgICpJTlRFR0VSIGlkIE5PVCBOVUxMCiAgIFZBUkNIQVI8MTAwPiBjaXR5CiAgIFRJTUVTVEFNUCBjcmVhdGVkCiAgIFZBUkNIQVI8NTA-IGZpcnN0X25hbWUKICAgVkFSQ0hBUjwxMDA-IGZ1bGxfYWRkcmVzcwogICBWQVJDSEFSPDEwMD4gZnVsbF9uYW1lCiAgIFZBUkNIQVI8NTA-IGxhc3RfbmFtZQogICBUSU1FU1RBTVAgbGFzdF91cGRhdGVkCiAgIFZBUkNIQVI8MTAwPiBwaG9uZQogICBWQVJDSEFSPDEwMD4gc3RhdGUKICAgVkFSQ0hBUjwxMDA-IHN0cmVldAp9CmNsYXNzIGRpbV9lbXBsb3llZXsKICAgKklOVEVHRVIgaWQgTk9UIE5VTEwKICAgVElNRVNUQU1QIGNyZWF0ZWQKICAgVkFSQ0hBUjw1MD4gZmlyc3RfbmFtZQogICBWQVJDSEFSPDEwMD4gZnVsbF9uYW1lCiAgIFZBUkNIQVI8NTA-IGxhc3RfbmFtZQogICBUSU1FU1RBTVAgbGFzdF91cGRhdGVkCn0KY2xhc3MgZGltX3ZlaGljbGV7CiAgICpJTlRFR0VSIGlkIE5PVCBOVUxMCiAgIFRJTUVTVEFNUCBjcmVhdGVkCiAgIFRJTUVTVEFNUCBsYXN0X3VwZGF0ZWQKICAgREVDSU1BTCBtc3JwX2Ftb3VudAogICBWQVJDSEFSPDEwMD4gdmluCn0KZGltX2N1c3RvbWVyICIwLi4xIiAtLSAiMC4ubiIgZmFjdF90cmFuc2FjdGlvbgpkaW1fZW1wbG95ZWUgIjAuLjEiIC0tICIwLi5uIiBmYWN0X3RyYW5zYWN0aW9uCmRpbV92ZWhpY2xlICIwLi4xIiAtLSAiMC4ubiIgZmFjdF90cmFuc2FjdGlvbg==)
