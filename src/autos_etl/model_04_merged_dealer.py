@@ -1,10 +1,9 @@
 from sqlalchemy import (
     BOOLEAN,
     DATE,
-    TIMESTAMP,
     DECIMAL,
     TEXT,
-    text,
+    TIMESTAMP,
     CheckConstraint,
     Column,
     ForeignKey,
@@ -12,6 +11,8 @@ from sqlalchemy import (
     MetaData,
     String,
     Table,
+    Text,
+    text,
 )
 
 # For ERAlchemy2. No schema supportin ERD creation from Python/SQLAlchemy.
@@ -92,13 +93,24 @@ fact_sale_transactions = Table(
         ForeignKey("dim_discount_type.id"),
         comment="Discount type ID for joining to discount description dimension.",
     ),  # noqa
+    Column("dim_transaction_notes_id", ForeignKey("dim_transaction_notes.id")),
     Column("sale_date", DATE, comment="Date of sale."),
     Column("purchase_price_amount", DECIMAL, comment="Purchase price amount."),
+    Column(
+        "dealer_purchase_cost_amount",
+        DECIMAL,
+        comment="Sale amount for car sold from supplier to dealer.",
+    ),  # noqa
     Column(
         "is_trade_in",
         BOOLEAN,
         comment="True if trade-in vehicle was sold on the transaction. False otherwise.",
-    ),  # noqa
+    ),
+    Column(
+        "is_financed",
+        BOOLEAN,
+        comment="True if financing was given.",
+    ),    
     Column("trade_in_value_amount", DECIMAL, comment="Value of trade-in vehicle."),
     comment="Sale transactions table to caputure the event of a vehicle sale and measures like purchase price amount.",  # noqa
 )
@@ -293,4 +305,18 @@ dim_vehicle_model = Table(
         comment="Manufacturer suggest retail price amount. List Price.",
     ),
     comment="Vehicle model dimensions for details such as year, make, model, trim, color, and more.",  # noqa
+)
+
+dim_transaction_notes = Table(
+    "dim_transaction_notes",
+    metadata_obj,
+    Column("id", Integer, primary_key=True),
+    Column("created", TIMESTAMP, server_default=text("CURRENT_TIMESTAMP")),
+    Column(
+        "last_updated",
+        TIMESTAMP,
+        server_default=text("CURRENT_TIMESTAMP"),
+        onupdate=text("CURRENT_TIMESTAMP"),
+    ),
+    Column("notes", Text, comment="Transaction notes."),
 )

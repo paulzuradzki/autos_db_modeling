@@ -7,10 +7,13 @@
 [fact_sale_transactions]
     *id {label:"INTEGER"}
     created {label:"TIMESTAMP"}
+    dealer_purchase_cost_amount {label:"DECIMAL"}
     dim_customer_id {label:"INTEGER"}
     dim_discount_type_id {label:"INTEGER"}
     dim_employee_id {label:"INTEGER"}
+    dim_transaction_notes_id {label:"INTEGER"}
     dim_vehicle_id {label:"INTEGER"}
+    is_financed {label:"BOOLEAN"}
     is_trade_in {label:"BOOLEAN"}
     last_updated {label:"TIMESTAMP"}
     purchase_price_amount {label:"DECIMAL"}
@@ -71,10 +74,16 @@
     trim {label:"VARCHAR(100)"}
     wheel_drive_type {label:"VARCHAR(20)"}
     year {label:"INTEGER"}
+[dim_transaction_notes]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    last_updated {label:"TIMESTAMP"}
+    notes {label:"TEXT"}
 dim_vehicle ?--* fact_inventory
 dim_customer ?--* fact_sale_transactions
 dim_employee ?--* fact_sale_transactions
-dim_vehicle ?--* fact_sale_transactions
 dim_discount_type ?--* fact_sale_transactions
+dim_transaction_notes ?--* fact_sale_transactions
+dim_vehicle ?--* fact_sale_transactions
 dim_customer ?--* fact_customer_relations
 dim_vehicle_model ?--* dim_vehicle

@@ -59,8 +59,8 @@
     wheel_drive_type {label:"VARCHAR(20)"}
     year {label:"INTEGER"}
 dim_vehicle ?--* fact_inventory
-dim_discount_type ?--* fact_sale_transactions
 dim_customer ?--* fact_sale_transactions
 dim_vehicle ?--* fact_sale_transactions
+dim_discount_type ?--* fact_sale_transactions
 dim_customer ?--* fact_customer_relations
 dim_vehicle_model ?--* dim_vehicle

@@ -4,7 +4,9 @@
     dealer_purchase_cost_amount {label:"DECIMAL"}
     dim_customer_id {label:"INTEGER"}
     dim_employee_id {label:"INTEGER"}
+    dim_transaction_notes_id {label:"INTEGER"}
     dim_vehicle_id {label:"INTEGER"}
+    is_financed {label:"BOOLEAN"}
     is_trade_in {label:"BOOLEAN"}
     last_updated {label:"TIMESTAMP"}
     purchase_price_amount {label:"DECIMAL"}
@@ -36,6 +38,12 @@
     last_updated {label:"TIMESTAMP"}
     msrp_amount {label:"DECIMAL"}
     vin {label:"VARCHAR(100)"}
+[dim_transaction_notes]
+    *id {label:"INTEGER"}
+    created {label:"TIMESTAMP"}
+    last_updated {label:"TIMESTAMP"}
+    notes {label:"TEXT"}
 dim_customer ?--* fact_transaction
-dim_employee ?--* fact_transaction
 dim_vehicle ?--* fact_transaction
+dim_transaction_notes ?--* fact_transaction
+dim_employee ?--* fact_transaction

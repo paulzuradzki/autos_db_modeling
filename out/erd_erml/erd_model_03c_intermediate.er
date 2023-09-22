@@ -14,6 +14,7 @@
     created {label:"TIMESTAMP"}
     dim_customer_id {label:"NULL"}
     dim_employee_id {label:"NULL"}
+    dim_transaction_notes_id {label:"NULL"}
     dim_vehicle_id {label:"NULL"}
     is_trade_in {label:"BOOLEAN"}
     last_updated {label:"TIMESTAMP"}

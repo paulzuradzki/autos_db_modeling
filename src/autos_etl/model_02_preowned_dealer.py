@@ -9,6 +9,7 @@ from sqlalchemy import (
     MetaData,
     String,
     Table,
+    Text,
     text,
 )
 
@@ -37,6 +38,7 @@ fact_transaction = Table(
     Column("dim_employee_id", ForeignKey("dim_employee.id")),
     Column("dim_customer_id", ForeignKey("dim_customer.id")),
     Column("dim_vehicle_id", ForeignKey("dim_vehicle.id")),
+    Column("dim_transaction_notes_id", ForeignKey("dim_transaction_notes.id")),
     Column("sale_date", DATE),
     Column("purchase_price_amount", DECIMAL),
     Column("dealer_purchase_cost_amount", DECIMAL),
@@ -44,7 +46,12 @@ fact_transaction = Table(
         "is_trade_in",
         BOOLEAN,
         comment="True if transaction involves a trade-in vehicle.",
-    ),  # noqa
+    ),
+    Column(
+        "is_financed",
+        BOOLEAN,
+        comment="True if financing was given.",
+    ),
     Column("trade_in_value_amount", DECIMAL),
     comment="""Transaction table of used cars. Transactions include (1) purchases from 
     customers buying car with or without a trade-in sale and (2) sales from suppliers to
@@ -105,4 +112,18 @@ dim_vehicle = Table(
         DECIMAL,
         comment="Manufacturer suggest retail price amount. List Price.",
     ),
+)
+
+dim_transaction_notes = Table(
+    "dim_transaction_notes",
+    metadata_obj,
+    Column("id", Integer, primary_key=True),
+    Column("created", TIMESTAMP, server_default=text("CURRENT_TIMESTAMP")),
+    Column(
+        "last_updated",
+        TIMESTAMP,
+        server_default=text("CURRENT_TIMESTAMP"),
+        onupdate=text("CURRENT_TIMESTAMP"),
+    ),
+    Column("notes", Text, comment="Transaction notes."),
 )

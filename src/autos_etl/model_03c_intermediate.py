@@ -1,16 +1,15 @@
 from sqlalchemy import (
     BOOLEAN,
     DATE,
-    TIMESTAMP,
     DECIMAL,
-    text,
+    TIMESTAMP,
     Column,
     ForeignKey,
     Integer,
     MetaData,
     Table,
+    text,
 )
-
 
 # For ERAlchemy2. No schema supportin ERD creation from Python/SQLAlchemy.
 # metadata_obj = MetaData(schema="autos_etl")
@@ -77,6 +76,7 @@ fact_transaction_dealer_02 = Table(
     Column("dim_employee_id", ForeignKey("dim_employee.id")),
     Column("dim_customer_id", ForeignKey("dim_customer.id")),
     Column("dim_vehicle_id", ForeignKey("dim_vehicle.id")),
+    Column("dim_transaction_notes_id", ForeignKey("dim_transaction_notes.id")),
     Column("sale_date", DATE),
     Column("purchase_price_amount", DECIMAL),
     Column(
