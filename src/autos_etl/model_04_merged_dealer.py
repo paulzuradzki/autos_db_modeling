@@ -82,11 +82,15 @@ fact_sale_transactions = Table(
         comment="Employee ID.",
     ),
     Column(
-        "dim_vehicle_id",
-        Integer,
+        "dealer_purchase_dim_vehicle_id",
         ForeignKey("dim_vehicle.id"),
-        comment="Vehicel ID for joining to vehicle dimensions.",
-    ),  # noqa
+        comment="Vehicle ID of the vehicle purchased by the dealer (e.g., from a supplier or trade-in customer.)",  # noqa
+    ),
+    Column(
+        "dealer_sale_dim_vehicle_id",
+        ForeignKey("dim_vehicle.id"),
+        comment="Vehicle ID of the vehicle sold by the dealer (e.g., to a supplier or individual customer.)", # noqa
+    ),
     Column(
         "dim_discount_type_id",
         Integer,
@@ -95,12 +99,8 @@ fact_sale_transactions = Table(
     ),  # noqa
     Column("dim_transaction_notes_id", ForeignKey("dim_transaction_notes.id")),
     Column("sale_date", DATE, comment="Date of sale."),
-    Column("purchase_price_amount", DECIMAL, comment="Purchase price amount."),
-    Column(
-        "dealer_purchase_cost_amount",
-        DECIMAL,
-        comment="Sale amount for car sold from supplier to dealer.",
-    ),  # noqa
+    Column("dealer_sale_price_amount", DECIMAL),
+    Column("dealer_purchase_cost_amount", DECIMAL),
     Column(
         "is_trade_in",
         BOOLEAN,
@@ -111,7 +111,7 @@ fact_sale_transactions = Table(
         BOOLEAN,
         comment="True if financing was given.",
     ),    
-    Column("trade_in_value_amount", DECIMAL, comment="Value of trade-in vehicle."),
+    # Column("trade_in_value_amount", DECIMAL, comment="Value of trade-in vehicle."),
     comment="Sale transactions table to caputure the event of a vehicle sale and measures like purchase price amount.",  # noqa
 )
 fact_customer_relations = Table(

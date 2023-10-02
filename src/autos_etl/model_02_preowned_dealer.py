@@ -37,10 +37,19 @@ fact_transaction = Table(
     Column("transaction_id", Integer),
     Column("dim_employee_id", ForeignKey("dim_employee.id")),
     Column("dim_customer_id", ForeignKey("dim_customer.id")),
-    Column("dim_vehicle_id", ForeignKey("dim_vehicle.id")),
+    Column(
+        "dealer_purchase_dim_vehicle_id",
+        ForeignKey("dim_vehicle.id"),
+        comment="Vehicle ID of the vehicle purchased by the dealer (e.g., from a supplier or trade-in customer.)",  # noqa
+    ),
+    Column(
+        "dealer_sale_dim_vehicle_id",
+        ForeignKey("dim_vehicle.id"),
+        comment="Vehicle ID of the vehicle sold by the dealer (e.g., to a supplier or individual customer.)", # noqa
+    ),
     Column("dim_transaction_notes_id", ForeignKey("dim_transaction_notes.id")),
     Column("sale_date", DATE),
-    Column("purchase_price_amount", DECIMAL),
+    Column("dealer_sale_price_amount", DECIMAL),
     Column("dealer_purchase_cost_amount", DECIMAL),
     Column(
         "is_trade_in",
@@ -52,7 +61,8 @@ fact_transaction = Table(
         BOOLEAN,
         comment="True if financing was given.",
     ),
-    Column("trade_in_value_amount", DECIMAL),
+    # Column("trade_in_value_amount", DECIMAL),
+    
     comment="""Transaction table of used cars. Transactions include (1) purchases from 
     customers buying car with or without a trade-in sale and (2) sales from suppliers to
     our organization.""",  # noqa

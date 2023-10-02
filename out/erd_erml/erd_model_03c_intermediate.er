@@ -9,16 +9,19 @@
     purchase_price_amount {label:"DECIMAL"}
     sale_date {label:"DATE"}
     trade_in_value_amount {label:"DECIMAL"}
-[fact_transaction_dealer_02]
+[fact_transaction_02]
     *id {label:"INTEGER"}
     created {label:"TIMESTAMP"}
+    dealer_purchase_cost_amount {label:"DECIMAL"}
+    dealer_purchase_dim_vehicle_id {label:"NULL"}
+    dealer_sale_dim_vehicle_id {label:"NULL"}
+    dealer_sale_price_amount {label:"DECIMAL"}
     dim_customer_id {label:"NULL"}
     dim_employee_id {label:"NULL"}
     dim_transaction_notes_id {label:"NULL"}
-    dim_vehicle_id {label:"NULL"}
+    is_financed {label:"BOOLEAN"}
     is_trade_in {label:"BOOLEAN"}
     last_updated {label:"TIMESTAMP"}
-    purchase_price_amount {label:"DECIMAL"}
     sale_date {label:"DATE"}
     trade_in_value_amount {label:"DECIMAL"}
     transaction_id {label:"INTEGER"}

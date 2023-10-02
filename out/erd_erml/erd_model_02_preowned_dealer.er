@@ -2,16 +2,16 @@
     *id {label:"INTEGER"}
     created {label:"TIMESTAMP"}
     dealer_purchase_cost_amount {label:"DECIMAL"}
+    dealer_purchase_dim_vehicle_id {label:"INTEGER"}
+    dealer_sale_dim_vehicle_id {label:"INTEGER"}
+    dealer_sale_price_amount {label:"DECIMAL"}
     dim_customer_id {label:"INTEGER"}
     dim_employee_id {label:"INTEGER"}
     dim_transaction_notes_id {label:"INTEGER"}
-    dim_vehicle_id {label:"INTEGER"}
     is_financed {label:"BOOLEAN"}
     is_trade_in {label:"BOOLEAN"}
     last_updated {label:"TIMESTAMP"}
-    purchase_price_amount {label:"DECIMAL"}
     sale_date {label:"DATE"}
-    trade_in_value_amount {label:"DECIMAL"}
     transaction_id {label:"INTEGER"}
 [dim_customer]
     *id {label:"INTEGER"}
@@ -43,7 +43,8 @@
     created {label:"TIMESTAMP"}
     last_updated {label:"TIMESTAMP"}
     notes {label:"TEXT"}
-dim_customer ?--* fact_transaction
 dim_vehicle ?--* fact_transaction
-dim_transaction_notes ?--* fact_transaction
 dim_employee ?--* fact_transaction
+dim_transaction_notes ?--* fact_transaction
+dim_vehicle ?--* fact_transaction
+dim_customer ?--* fact_transaction
